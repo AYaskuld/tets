@@ -2,13 +2,13 @@ stages:
   - name: first-stage
     image: golang:1.16
     commands:
-      - command: go build -o my-app
+      - go build -o my-app
 
   - name: second-stage
     image: alpine:latest
     commands:
-      - command: mkdir /app
-      - command: cp /build-stage/my-app /app/
+      - mkdir /app
+      - cp /build-stage/my-app /app/
     ports:
       - 8080:80
     env:
