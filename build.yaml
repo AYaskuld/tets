@@ -14,3 +14,5 @@ stages:
     env:
       - key: foo
         value: bar
+      - key: fofo
+        value: babar
