@@ -1,15 +1,16 @@
 stages:
-  - build
-  - deploy
+  - name: first-stage
+    image: golang:1.16
+    commands:
+      - command: go build -o my-app
 
-build-image:
-  stage: build
-  image: "golang:latest"
-  script:
-    - "go build -o /app/myapp /src/main.go"
-    
-deploy-app:
-  stage: deploy
-  image: "alpine:latest"
-  script:
-    - "cp /app/myapp /dist/myapp"
+  - name: second-stage
+    image: alpine:latest
+    commands:
+      - command: mkdir /app
+      - command: cp /build-stage/my-app /app/
+    ports:
+      - 8080:80
+    env:
+      - key: foo
+        value: bar
