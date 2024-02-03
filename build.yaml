@@ -1,16 +1,16 @@
 stages:
-  - name: first-stage
-    image: golang:1.16
+  - name: build
+    image: alpine:3.13
     commands:
-      - go build -o my-app
+      - echo "hello world"
 
-  - name: second-stage
-    image: alpine:latest
+  - name: create-image
+    image: nginx:1.25.3-alpine
     commands:
       - mkdir /app
-      - cp /build-stage/my-app /app/
+      - cp -r /usr/share/nginx/html /app
     ports:
-      - 8080:80
+      - 80
     env:
       - key: foo
         value: bar
