@@ -8,7 +8,7 @@ stages:
   - name: create-image
     image: nginx:1.25.3-alpine
     commands:
-      - cp -r ./* /user/share/nginx/html
+      - cp -r ./* /usr/share/nginx/html
     ports:
       - 80
     env:
