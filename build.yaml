@@ -1,14 +1,14 @@
 stages:
   - name: build
     image: alpine:3.13
-    commands:
+    copy:
       - echo "hello world"
       - ls -la ./
 
   - name: create-image
     image: nginx:1.25.3-alpine
-    commands:
-      - cp -r ./* /usr/share/nginx/html
+    copy:
+      - cp -r  /usr/share/nginx/html
     ports:
       - 80
     env:
