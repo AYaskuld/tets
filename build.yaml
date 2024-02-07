@@ -3,6 +3,7 @@ stages:
     image: alpine:3.13
     commands:
       - echo "hello world"
+      - ls -la
 
   - name: create-image
     image: nginx:1.25.3-alpine
