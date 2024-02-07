@@ -1,7 +1,7 @@
 stages:
   - name: build
     image: alpine:3.13
-    copy:
+    command:
       - echo "hello world"
       - ls -la ./
 
