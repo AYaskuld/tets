@@ -1,19 +1,12 @@
-stages:
-  - name: build
-    image: alpine:3.13
-    commands:
-      - echo "hello world"
-      - ls -la ./
-
-  - name: create-image
-    image: nginx:1.25.3-alpine
-    copy:
-      - ./ /usr/share/nginx/html
-      - ./index.html  /var
-    ports:
-      - 80
-    env:
-      - key: foo
-        value: bar
-      - key: fofo
-        value: babar
+version: 1
+build:
+  image: blabla:1.0.0
+  commands:
+  - echo "hello world"
+  - ls -la ./
+  entrypoint:
+    path: /var/www/
+    index: index.html
+  env:
+    FOO: bar
+    BAR: foo
