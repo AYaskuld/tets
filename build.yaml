@@ -1,6 +1,6 @@
 version: 1
 build:
-  image: blabla:1.0.0
+  image: alpine:3.13
   commands:
   - echo "hello world"
   - ls -la ./
