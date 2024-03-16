@@ -9,6 +9,9 @@ build:
   - echo "2" && sleep 1
   - echo "1" && sleep 1
   - echo "BOOM"
+  entrypoint:
+    path: "/var/www/project"
+    index: "index.html"
   env:
     FOO: bar
     BAR: foo
