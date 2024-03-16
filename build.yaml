@@ -10,7 +10,7 @@ build:
   - echo "1" && sleep 1
   - echo "BOOM"
   entrypoint:
-    path: /var/www/
+    path: /var/www/project
     index: index.html
   env:
     FOO: bar
