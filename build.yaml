@@ -4,7 +4,7 @@ build:
   commands:
   - echo "hello world"
   - ls -la ./
-  - echo "sleepping" && sleep 5
+  - echo "This is NEW branch" && sleep 5
   - echo "3" && sleep 1
   - echo "2" && sleep 1
   - echo "1" && sleep 1
