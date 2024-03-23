@@ -6,8 +6,8 @@ env:
   FOO: bar
   BAR: foo
 build:
-  images
-commands:  - echo "hello world"
+  images:
+  commands:  - echo "hello world"
   - ls -la ./
   - echo "sleepping" && sleep 5
   - echo "3" && sleep 1
