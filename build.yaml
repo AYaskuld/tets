@@ -6,7 +6,6 @@ env:
   FOO: bar
   BAR: foo
 build:
-  image: alpine:3.13
    commands:
   - echo "hello world"
   - ls -la ./
