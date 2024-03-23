@@ -6,7 +6,7 @@ env:
   FOO: bar
   BAR: foo
 build:
-   commands:
+  commands:
   - echo "hello world"
   - ls -la ./
   - echo "sleepping" && sleep 5
