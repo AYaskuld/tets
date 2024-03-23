@@ -6,6 +6,7 @@ env:
   FOO: bar
   BAR: foo
 build:
+  imas:
   commands:
   - echo "hello world"
   - ls -la ./
