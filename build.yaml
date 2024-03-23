@@ -3,11 +3,11 @@ entrypoint:
   path: "/var/www/project"
   index: "index.html"
 env:
- FOO: bar
+  FOO: bar
   BAR: foo
 build:
   image: alpine:3.13
-  commands:
+   commands:
   - echo "hello world"
   - ls -la ./
   - echo "sleepping" && sleep 5
