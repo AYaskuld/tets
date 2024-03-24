@@ -6,7 +6,6 @@ env:
   FOO: bar
   BAR: foo
 build:
-  image: image
   commands:
   - echo "hello world"
   - ls -la ./
@@ -15,3 +14,4 @@ build:
   - echo "2" && sleep 1
   - echo "1" && sleep 1
   - echo "BOOM"
+  image: image
