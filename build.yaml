@@ -14,4 +14,4 @@ build:
   image: alpine:3.13
 entrypoint:
   index: index.html
-  path:/var/www/project
+  path: /var/www/project
