@@ -13,5 +13,5 @@ build:
   - echo "BOOM"
   image: alpine:3.13
 entrypoint:
-  path: /var/www/project
+  path:/var/www/project
   index: index.html
