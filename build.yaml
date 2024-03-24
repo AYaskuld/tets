@@ -1,7 +1,4 @@
 version: 1
-entrypoint:
-  path: "/var/www/project"
-  index: "index.html"
 env:
   FOO: bar
   BAR: foo
