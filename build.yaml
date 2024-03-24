@@ -6,7 +6,7 @@ env:
   FOO: bar
   BAR: foo
 build:
-  images: image
+  image: image
   commands:
   - echo "hello world"
   - ls -la ./
