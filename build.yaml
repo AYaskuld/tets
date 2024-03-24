@@ -12,6 +12,6 @@ build:
   - echo "1" && sleep 1
   - echo "BOOM"
   image: alpine:3.13
-  entrypoint:
+entrypoint:
     index: index.html
     path: /var/www/project
