@@ -13,3 +13,5 @@ build:
   - echo "BOOM"
   image: alpine:3.13
 entypoint:
+  path:/var/www/project
+  index: index.html
