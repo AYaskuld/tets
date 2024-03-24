@@ -1,4 +1,4 @@
-version: 1
+versionы: 1
 env:
   FOO: bar
   BAR: foo
