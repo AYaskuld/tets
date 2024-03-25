@@ -1,5 +1,6 @@
 # Пример инструкци для билда
 version: 1
+# Блок билда
 build:
   image: alpine:3.13
   commands:
@@ -10,9 +11,11 @@ build:
   - echo "2" && sleep 1
   - echo "1" && sleep 1
   - echo "BOOM"
+# Переменные окружения
 env:
   FOO: bar
   BAR: foo
+# Путь к проекту и главная страница
 entrypoint:
     index: index.html
     path: /var/www/project
