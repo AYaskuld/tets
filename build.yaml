@@ -1,3 +1,4 @@
+# пример файла build.yaml
 version: 1
 env:
   FOO: bar
