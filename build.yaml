@@ -18,5 +18,5 @@ env:
   BAR: foo
 # Путь к проекту и главная страница
 entrypoint:
-    index: index.php
+    index: index.html
     path: /var/www/project
