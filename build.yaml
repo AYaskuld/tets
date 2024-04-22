@@ -15,7 +15,7 @@ build:
 # Переменные окружения развернутого проекта
 language:
   name: php
-  version: 8.1
+  version: "8.1"
 env:
   FOO: bar
   BAR: foo
