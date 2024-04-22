@@ -13,6 +13,9 @@ build:
   - echo "1" && sleep 1
   - echo "BOOM"
 # Переменные окружения развернутого проекта
+language:
+  name: php
+  version: 8.1
 env:
   FOO: bar
   BAR: foo
