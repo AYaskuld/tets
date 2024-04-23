@@ -10,4 +10,3 @@ app:
   # Путь к проекту и главная страница
   entrypoint:
     index: index.html
-    path: /var/www/project
