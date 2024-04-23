@@ -1,22 +1,13 @@
 # Этот файл должен быть в корне репозитория
 # Если один из блоков не нужен, то его можно удалить
 version: 1
-# Блок инструкций для стадии билда
-build:
-  image: alpine:3.13
-  commands:
-  - echo "hello world"
-  - ls -la ./
-  - echo "sleepping" && sleep 5
-  - echo "3" && sleep 1
-  - echo "2" && sleep 1
-  - echo "1" && sleep 1
-  - echo "BOOM"
-# Переменные окружения развернутого проекта
-env:
-  FOO: bar
-  BAR: foo
-# Путь к проекту и главная страница
-entrypoint:
+app:
+  webserver: nginx
+  # Переменные окружения развернутого проекта
+  env:
+    FOO: bar
+    BAR: foo
+  # Путь к проекту и главная страница
+  entrypoint:
     index: index.html
     path: /var/www/project
