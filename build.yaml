@@ -3,7 +3,7 @@
 version: 1
 app:
   fpm: true
-  version: 8.1
+  version: "8.1"
   # Environment variables of the deployed project
   env:
     FOO: bar
