@@ -1,12 +1,14 @@
-# Этот файл должен быть в корне репозитория
-# Если один из блоков не нужен, то его можно удалить
+# This file should be in the root of the repository
+# If one of the blocks is not needed, it can be deleted
 version: 1
 app:
-  webserver: nginx-fpm
-  version: "8.1"
+  fpm: true
+  version: 8.1
+  # Environment variables of the deployed project
   env:
     FOO: bar
     BAR: foo
-  # Путь к проекту и главная страница
+  # Project path and index page
   entrypoint:
     index: index.php
+    path: /var/www/project
