@@ -2,7 +2,7 @@
 # Если один из блоков не нужен, то его можно удалить
 version: 1
 app:
-  webserver: php
+  webserver: nginx-fpm
   version: "8.1"
   env:
     FOO: bar
