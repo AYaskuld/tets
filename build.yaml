@@ -3,6 +3,14 @@
 version: 1
 build:
   image: alpine:3.13
+  commands:
+  - echo "hello world"
+  - ls -la ./
+  - echo "sleepping" && sleep 5
+  - echo "3" && sleep 1
+  - echo "2" && sleep 1
+  - echo "1" && sleep 1
+  - echo "BOOM"
 app:
   webserver: nginx
   # Переменные окружения развернутого проекта
