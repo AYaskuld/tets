@@ -9,3 +9,6 @@ build:
     - pip install -r requirements.txt
   start_commands:
     - python3 ./app.py
+env:
+  FOO: bar
+  BAR: foo
