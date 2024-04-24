@@ -5,6 +5,7 @@ version: 1
 build:
   language: python
   version: "3.9"
-  start_commands:
+  build_commands:
     - pip install -r requirements.txt
+  start_commands:
     - python3 ./app.py
