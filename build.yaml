@@ -1,13 +1,12 @@
 # This file should be in the root of the repository
 # If one of the blocks is not needed, it can be deleted
 version: 1
-nginx:
-  # Enables fpm
-  fpm_enable: false
-  # Project path and index page
-  entrypoint:
-    index: index.html
-    path: /var/www/project
+# Block of instructions for the build stage
+build:
+  language: nodejs
+  version: "18"
+  build_commands:
+    - npm install --loglevel=verbose
 # Environment variables of the deployed project
 env:
   FOO: bar
