@@ -3,7 +3,7 @@
 version: 1
 # Block of instructions for the build stage
 build:
-  language: nodejs
+  image: nodejs
   version: "18"
   build_commands:
     - npm install --loglevel=verbose
