@@ -1,15 +1,10 @@
 # This file should be in the root of the repository
-# If one of the blocks is not needed, it can be deleted
 version: 1
-nginx:
-  # Enables fpm
+frontend:
   fpm_enable: true
   version: "8.1"
-  # Project path and index page
   entrypoint:
     index: index.php
-    path: /var/www/project
-# Environment variables of the deployed project
 env:
   FOO: bar
   BAR: foo
