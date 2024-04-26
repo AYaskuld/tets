@@ -2,14 +2,8 @@
 # If one of the blocks is not needed, it can be deleted
 version: 1
 nginx:
-  # Enables fpm
-  fpm_enable: true
-  version: "8.1"
-  # Project path and index page
   entrypoint:
-    index: index.php
-    path: /var/www/project
-# Environment variables of the deployed project
+    index: index.html
 env:
   FOO: bar
   BAR: foo
