@@ -1,15 +1,14 @@
 # This file should be in the root of the repository
 # If one of the blocks is not needed, it can be deleted
 version: 1
-# Block of instructions for the build stage
 build:
   image: nodejs
   version: "18"
   build_commands:
     - npm install --loglevel=verbose
-  start_commands:
-    - node ./app.js
-# Environment variables of the deployed project
+nginx:
+  entrypoint:
+    index: index.html
 env:
   FOO: bar
   BAR: foo
