@@ -2,7 +2,7 @@
 version: 1
 build:
   image: nodejs
-  version: "18"
+  version: 18
   build_commands:
     - npm install --loglevel=verbose
 frontend:
