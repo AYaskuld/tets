@@ -5,8 +5,9 @@ version: 1
 build:
   image: golang
   version: 1.22.1
+    - CGO_ENABLED=0 go build -a -ldflags="-s -w" -o ./app ./
   start_commands:
-    - go run main.go
+    - ./app
 # Environment variables of the deployed project
 env:
   FOO: bar
