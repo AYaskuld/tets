@@ -3,12 +3,10 @@
 version: 1
 # Block of instructions for the build stage
 build:
-  image: nodejs
-  version: "18"
-  build_commands:
-    - npm install --loglevel=verbose
+  image: golang
+  version: 1.22.1
   start_commands:
-    - node ./app.js
+    - go run main.go
 # Environment variables of the deployed project
 env:
   FOO: bar
