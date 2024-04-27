@@ -4,7 +4,6 @@ version: 1
 frontend:
   entrypoint:
     index: index.html
-    path: /project
 env:
   FOO: bar
   BAR: foo
