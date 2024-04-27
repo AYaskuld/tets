@@ -8,4 +8,3 @@ frontend:
 env:
   FOO: bar
   BAR: foo
-  MAR: gar
