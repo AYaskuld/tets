@@ -4,6 +4,7 @@ build:
   image: nodejs
   version: 18
   build_commands:
+    - echo "hello world"
     - npm install --loglevel=verbose
 frontend:
   entrypoint:
