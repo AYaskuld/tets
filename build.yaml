@@ -1,7 +1,6 @@
 # This file should be in the root of the repository
 version: 1
 frontend:
-123
   fpm_enable: true
   version: "8.1"
   entrypoint:
