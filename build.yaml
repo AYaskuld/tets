@@ -11,5 +11,5 @@ build:
     - ./app
 # Environment variables of the deployed project
 env:
-  FOO: bar
+  FOO: foo
   BAR: foo
