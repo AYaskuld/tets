@@ -1,7 +1,7 @@
 # This file should be in the root of the repository
 # If one of the blocks is not needed, it can be deleted
 version: 1
-domain_name: ayasite.ddns.net
+domain_name: "ayasite.ddns.net"
 frontend:
   entrypoint:
     index: index.html
