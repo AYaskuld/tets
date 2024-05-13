@@ -4,7 +4,7 @@ version: 1
 # Block of instructions for the build stage
 build:
   image: python
-  version: "3.9"
+  version: 3.9
   build_commands:
     - pip install -r requirements.txt
   start_commands:
