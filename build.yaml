@@ -2,6 +2,7 @@
 # If one of the blocks is not needed, it can be deleted
 version: 1
 # Block of instructions for the build stage
+domain_name: ayasite.ddns.net
 build:
   image: python
   version: 3.9
