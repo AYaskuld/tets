@@ -2,5 +2,4 @@ version: 1.0.0
 stages:
   build:
     steps:
-      - npm i
-      - npm run
+      - cp index.html /usr/share/nginx/html/
