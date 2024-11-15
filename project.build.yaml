@@ -1,6 +1,6 @@
 version: 1.0.0
+container_arg: nginx/nginx.conf
 stages:
-  container_arg: nginx/nginx.conf
   build:
     steps:
       - cp index.html /usr/share/nginx/html/
