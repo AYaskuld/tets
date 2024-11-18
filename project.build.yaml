@@ -3,4 +3,4 @@ entrypoint: app.py
 stages:
   build:
     steps:
-      - cp index.html /usr/share/nginx/html/
+      - pip install -r requirements.txt
