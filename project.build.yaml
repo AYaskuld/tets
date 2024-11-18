@@ -1,0 +1,6 @@
+version: 1.0.0
+entrypoint: app.py
+stages:
+  build:
+    steps:
+      - cp index.html /usr/share/nginx/html/
