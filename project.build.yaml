@@ -5,3 +5,5 @@ stages:
     steps:
       - pip install -r requirements.txt
       - echo "hello world"
+  test:
+      - echo "test1"
