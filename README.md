@@ -28,8 +28,13 @@ pip install -r requirements.txt
 Таблица user создает автоматически при запуске приложения.
 
 ### 5. Запуск приложения
+**Prod:**
 ```bash
 gunicorn
+```
+**Dev:**
+```bash
+python3 main.py
 ```
 ## API Эндпоинты
 
