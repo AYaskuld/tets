@@ -29,7 +29,7 @@ pip install -r requirements.txt
 
 ### 5. Запуск приложения
 ```sh
-python app.py
+python main.py
 ```
 ## API Эндпоинты
 
