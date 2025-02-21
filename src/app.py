@@ -1,5 +1,5 @@
 from flask import Flask
-from src.models.user import db
+from src.models.user import db, User
 from .config.server import Config
 
 def create_app():
@@ -8,6 +8,9 @@ def create_app():
 
     db.init_app(app)
 
+    with app.app_context():
+        db.create_all()
+        
     from src.routes.user_routes import api
     app.register_blueprint(api)
 
