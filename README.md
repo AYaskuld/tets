@@ -34,36 +34,44 @@ gunicorn
 ## API Эндпоинты
 
 ### 1. Создание пользователя
-**POST** `/createuser/<name>`
+**POST** `/createuser`
 #### Пример запроса:
 ```sh
-curl -X POST http://localhost:8080/api/createuser/Alice
+curl --location 'http://localhost:8080/api/createuser' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Alice"
+}'
 ```
 #### Ответ:
-```
-User Alice created!
+```json
+{"message": "User Alice created!"}
 ```
 
 ### 2. Получение пользователя
-**GET** `/getuser/<name>`
+**GET** `/getuser?name=<name>`
 #### Пример запроса:
 ```sh
-curl http://localhost:8080/api/getuser/Alice
+curl -X GET 'http://localhost:8080/api/getuser?name=Alice'
 ```
 #### Ответ:
-```
-Hello, Alice!
+```json
+{"message": "Hello, Alice!"}
 ```
 
 ### 3. Удаление пользователя (soft delete)
-**DELETE** `/deleteuser/<name>`
+**DELETE** `/deleteuser`
 #### Пример запроса:
 ```sh
-curl -X DELETE http://localhost:8080/api/deleteuser/Alice
+curl --location --request DELETE 'http://localhost:8080/api/deleteuser' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Alice"
+}'
 ```
 #### Ответ:
-```
-User Alice marked as deleted!
+```json
+{"message": "User Alice marked as deleted!"}
 ```
 
 ## Автор
