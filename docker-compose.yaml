@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:14.4-alpine
+    container_name: ${POSTGRES_HOST}
+    restart: always
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - "db_data:/var/lib/postgresql/data"
+    env_file:
+      - .env
+    command: ["postgres", "-c", "port=${POSTGRES_PORT}", "-c", "log_statement=all"]
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - user_net    
+  app:
+    build: .
+    container_name: app
+    restart: always
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    env_file:
+      - .env
+    depends_on: 
+      - postgres
+    networks:
+      - user_net
+      
+networks:
+  user_net:
+
+volumes:
+  db_data:
