@@ -99,9 +99,15 @@ curl --location --request DELETE 'http://localhost/api/deleteuser' \
     "name": "Alice"
 }'
 ```
+### 4. Healthcheck
+**GET** `/health`
+#### Пример запроса:
+```sh
+curl --location --request GET 'http://localhost/api/health'
+```
 #### Ответ:
 ```json
-{"message": "User Alice marked as deleted!"}
+{"message":"Ok"}
 ```
 
 ## Автор

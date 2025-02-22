@@ -48,3 +48,7 @@ def delete_user():
         return jsonify({"message": f"User {escape(user.name)} marked as deleted!"})
 
     return jsonify({"error" "User not found"}), 400
+
+@api.route("/health", methods=["GET"])
+def health():
+    return jsonify({"message": "Ok"}), 200
