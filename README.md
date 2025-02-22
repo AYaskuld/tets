@@ -1,48 +1,72 @@
 # Flask User Management API
 
+## Используемые технологии
+
+- **[Docker+docker-compose](https://www.docker.com/)**: Инструменты для контейнеризации приложений.
+- **[Python v3.9.21](https://www.python.org/downloads/release/python-3921/)**: Язык программирования Python.
+- **[Flask](https://flask.palletsprojects.com/en/stable/)**: Фреймворк для создания микросервисов.
+- **[Gunicorn](https://gunicorn.org/)**: HTTP-сервер Python WSGI для UNIX
+- **[Nginx](https://nginx.org/ru/)**: обратынй прокси сервер
+- **[Certbot](https://github.com/certbot/certbot)**: инструмент для выдачи сектификатов letsencrypt
+
 ## Описание
-Это простое Flask-приложение для управления пользователями с возможностью их создания, получения и мягкого удаления (soft delete). Приложение использует PostgreSQL в качестве базы данных.
+Flask-приложение для управления пользователями с возможностью их создания, получения и мягкого удаления (soft delete). Приложение использует PostgreSQL в качестве базы данных.
 
-## Установка и запуск
 
-### 1. Запуск базы данных PostgreSQL
-Перед запуском приложения убедитесь, что у вас запущен экземпляр PostgreSQL и доступны учетные данные для подключения.
+## Настройка
 
-### 2. Установка зависимостей
+Для запуска необходим `.env` файл в корне репозитория.
+
+### Пример `.env` файла
+
 ```bash
-pip install -r requirements.txt
+POSTGRES_HOST=user_db
+POSTGRES_PORT=5432
+POSTGRES_USER=secret_user
+POSTGRES_PASSWORD=secret_passwd
+POSTGRES_DB=users
+SERVER_PORT=8000
 ```
 
-### 3. Настройка переменных окружения
+### Описание настроек
 
-| Переменная       | Описание                                   | Значение по умолчанию |
-|------------------|--------------------------------------------|-----------------------|
-| POSTGRES_USER    | Имя пользователя БД                        | `user`                |
-| POSTGRES_PASSWORD| Пароль пользователя БД                     | ` `                   |
-| POSTGRES_HOST    | Хост базы данных                           | `localhost`           |
-| POSTGRES_PORT    | Порт для подключения к БД                  | `5432`                |
-| POSTGRES_DB      | Название базы данных                       | `db`                  |
-| SERVER_PORT      | Порт по которому приложение будет доступно | `8080`                |
+| Переменная       | Описание                                   | Значение по умолчанию  |
+|------------------|--------------------------------------------|------------------------|
+| POSTGRES_USER    | Имя пользователя БД                        | `user`                 |
+| POSTGRES_PASSWORD| Пароль пользователя БД                     | `super_secret_password`|
+| POSTGRES_HOST    | Хост базы данных                           | `localhost`            |
+| POSTGRES_PORT    | Порт для подключения к БД                  | `5432`                 |
+| POSTGRES_DB      | Название базы данных                       | `db`                   |
+| SERVER_PORT      | Порт по которому приложение будет доступно | `8080`                 |
 
-### 4. Инициализация базы данных
-Таблица user создает автоматически при запуске приложения.
 
-### 5. Запуск приложения
-**Prod:**
+## Запуск приложения
+
+- **Сборка и разворачивание сервиса:**
+
 ```bash
-gunicorn
+make up
 ```
-**Dev:**
+
+- **Остановка сервиса:**
+
 ```bash
-python3 main.py
+make down
 ```
+
+- **Перезапуск сервисов:**
+
+```bash
+make restart
+```
+
 ## API Эндпоинты
 
 ### 1. Создание пользователя
 **POST** `/createuser`
 #### Пример запроса:
 ```sh
-curl --location 'http://localhost:8080/api/createuser' \
+curl --location 'http://localhost/api/createuser' \
 --header 'Content-Type: application/json' \
 --data '{
     "name": "Alice"
@@ -57,7 +81,7 @@ curl --location 'http://localhost:8080/api/createuser' \
 **GET** `/getuser?name=<name>`
 #### Пример запроса:
 ```sh
-curl -X GET 'http://localhost:8080/api/getuser?name=Alice'
+curl -X GET 'http://localhost/api/getuser?name=Alice'
 ```
 #### Ответ:
 ```json
@@ -68,7 +92,7 @@ curl -X GET 'http://localhost:8080/api/getuser?name=Alice'
 **DELETE** `/deleteuser`
 #### Пример запроса:
 ```sh
-curl --location --request DELETE 'http://localhost:8080/api/deleteuser' \
+curl --location --request DELETE 'http://localhost/api/deleteuser' \
 --header 'Content-Type: application/json' \
 --data '{
     "name": "Alice"
