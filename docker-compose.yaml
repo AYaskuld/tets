@@ -3,8 +3,8 @@ services:
     image: postgres:14.4-alpine
     container_name: ${POSTGRES_HOST}
     restart: always
-    ports:
-      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    expose:
+      - ${POSTGRES_PORT}
     volumes:
       - "db_data:/var/lib/postgresql/data"
     env_file:
@@ -27,7 +27,8 @@ services:
     env_file:
       - .env
     depends_on: 
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - user_net
       
