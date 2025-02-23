@@ -1,54 +1,49 @@
-from flask import Blueprint, request, jsonify
-from markupsafe import escape
-from datetime import datetime
-from src.models.user import db, User
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
+from datetime import datetime, timezone
 
-api = Blueprint('api', __name__, url_prefix='/api')
+from src.models.user import User
+from src.database.client import get_db
+from src.schemas.users import UserCreate, UserResponse
 
-@api.route('/getuser', methods=['GET'])
-def get_user():
-    name = request.args.get('name')
-    if not name:
-        return jsonify({"error": 'Query parameter "name" is required'}), 400
+router = APIRouter(prefix="/api", tags=["Users"])
 
-    user = User.query.filter_by(name=name, deleted_at=None).first()
-    if user:
-        return jsonify({"message": f"Hello, {escape(user.name)}!"})
-
-    return jsonify({"error": "User not found"}), 404
-
-
-@api.route('/createuser', methods=['POST'])
-def create_user():
-    data = request.get_json()
-    if not data or "name" not in data:
-        return jsonify({"error": 'Field "name" is required'}), 400
-
-    name = data["name"]
-    user = User.query.filter_by(name=name, deleted_at=None).first()
+# Получение пользователя
+@router.get("/getuser", response_model=UserResponse)
+async def get_user(name: str, db: AsyncSession = Depends(get_db)):
+    user = await db.scalar(select(User).filter(User.name == name, User.deleted_at.is_(None)))
     if not user:
-        user = User(name=name)
-        db.session.add(user)
-        db.session.commit()
-        return jsonify({"message": f"User {name} created!"})
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
 
-    return jsonify({"error": f"User {name} already exists"}), 400
+@router.post("/createuser", response_model=UserResponse)
+async def create_user(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(User).filter(User.name == user_data.name, User.deleted_at == None))
+    existing_user = result.scalars().first()
 
-@api.route('/deleteuser', methods=['DELETE'])
-def delete_user():
-    data = request.get_json()
-    if not data or "name" not in data:
-        return jsonify({"error": 'Field "name" is required'}), 400
+    if existing_user:
+        raise HTTPException(status_code=400, detail=f"User {user_data.name} already exists")
 
-    name = data["name"]
-    user = User.query.filter_by(name=name, deleted_at=None).first()
-    if user:
-        user.deleted_at = datetime.now()
-        db.session.commit()
-        return jsonify({"message": f"User {escape(user.name)} marked as deleted!"})
+    new_user = User(name=user_data.name)
+    db.add(new_user)
+    await db.commit()
+    await db.refresh(new_user)
+    return new_user
 
-    return jsonify({"error" "User not found"}), 400
+@router.delete("/deleteuser", response_model=UserResponse)
+async def delete_user(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(User).filter(User.name == user_data.name, User.deleted_at == None))
+    user = result.scalars().first()
 
-@api.route("/health", methods=["GET"])
-def health():
-    return jsonify({"message": "Ok"}), 200
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    user.deleted_at = datetime.now().replace(tzinfo=None)
+    await db.commit()
+    await db.refresh(user)
+    return user
+
+@router.get("/health")
+async def health():
+    return {"message": "Ok"}

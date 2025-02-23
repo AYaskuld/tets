@@ -10,4 +10,6 @@ COPY . .
 
 EXPOSE 8080
 
-ENTRYPOINT [ "gunicorn" ]
+ENTRYPOINT [ "python3" ]
+
+CMD ["main.py"]

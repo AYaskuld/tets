@@ -1,9 +1,22 @@
-from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.ext.asyncio import AsyncAttrs, AsyncSession, create_async_engine
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
+from datetime import datetime, timezone
+from typing import Optional
 
-db = SQLAlchemy()
+from src.config.server import DB_Config
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), unique=False, nullable=False)
-    created_at = db.Column(db.DateTime, server_default=db.func.now())
-    deleted_at = db.Column(db.DateTime, nullable=True)
+
+engine = create_async_engine(DB_Config.DATABASE_URI, echo=True)
+async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+
+# Базовый класс
+class Base(AsyncAttrs, DeclarativeBase):
+    pass
+
+class User(Base):
+    __tablename__ = "users"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(unique=False, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow)
+    deleted_at: Mapped[Optional[datetime]] = mapped_column(nullable=True)
