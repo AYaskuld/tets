@@ -9,7 +9,6 @@ from src.schemas.users import UserCreate, UserResponse
 
 router = APIRouter(prefix="/api", tags=["Users"])
 
-# Получение пользователя
 @router.get("/getuser", response_model=UserResponse)
 async def get_user(name: str, db: AsyncSession = Depends(get_db)):
     user = await db.scalar(select(User).filter(User.name == name, User.deleted_at.is_(None)))

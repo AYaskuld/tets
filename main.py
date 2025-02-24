@@ -7,10 +7,8 @@ from src.config.server import Server_Config
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Ваши действия на старте приложения
     await init_db()
     yield
-    # Действия при завершении работы (если нужно)
 
 app = FastAPI(title="FastAPI Users API", lifespan=lifespan)
 

@@ -9,7 +9,6 @@ from src.config.server import DB_Config
 engine = create_async_engine(DB_Config.DATABASE_URI, echo=True)
 async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
-# Базовый класс
 class Base(AsyncAttrs, DeclarativeBase):
     pass
 
