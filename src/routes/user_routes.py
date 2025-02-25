@@ -9,7 +9,8 @@ from src.schemas.users import UserCreate, UserResponse
 import time
 import random
 
-router = APIRouter(prefix="/api", tags=["Users"])
+
+router = APIRouter(tags=["Users"])
 
 @router.get("/getuser", response_model=UserResponse)
 async def get_user(name: str, db: AsyncSession = Depends(get_db)):

@@ -63,7 +63,7 @@ make restart
 ## Документация
 Доступно по endpoint 
 ```
-http://localhost/docs
+http://localhost/api/docs
 ```
 ##  Healthcheck
 **GET** `/health`
