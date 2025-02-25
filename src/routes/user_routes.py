@@ -1,11 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from datetime import datetime, timezone
-
+from datetime import datetime
 from src.models.user import User
 from src.database.client import get_db
 from src.schemas.users import UserCreate, UserResponse
+
+import time
+import random
 
 router = APIRouter(prefix="/api", tags=["Users"])
 
@@ -43,6 +45,39 @@ async def delete_user(user_data: UserCreate, db: AsyncSession = Depends(get_db))
     await db.refresh(user)
     return user
 
+
+start_time = time.time()
+failure_start_time = None
+
+healthy_duration = random.randint(60, 180)
+failure_duration = random.randint(60, 180) 
+
+def is_healthy():
+    global failure_start_time, start_time, healthy_duration, failure_duration
+
+    current_time = time.time()
+
+    if failure_start_time and (current_time - failure_start_time < failure_duration):
+        return False  
+
+    if failure_start_time and (current_time - failure_start_time >= failure_duration):
+        failure_start_time = None
+        start_time = current_time  
+        healthy_duration = random.randint(60, 180)
+
+    if not failure_start_time and (current_time - start_time >= healthy_duration):
+        failure_start_time = current_time
+        failure_duration = random.randint(60, 180)
+        return False
+
+    return True
+
+
 @router.get("/health")
 async def health():
-    return {"message": "Ok"}
+    if is_healthy():
+        return {"status": "ok"}
+    else:
+        raise HTTPException(status_code=503, detail="Service Unavailable")
+
+
