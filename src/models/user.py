@@ -1,13 +1,8 @@
-from sqlalchemy.ext.asyncio import AsyncAttrs, AsyncSession, create_async_engine
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
-from datetime import datetime, timezone
+from sqlalchemy.ext.asyncio import AsyncAttrs
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from datetime import datetime
 from typing import Optional
 
-from src.config.server import DB_Config
-
-
-engine = create_async_engine(DB_Config.DATABASE_URI, echo=True)
-async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 class Base(AsyncAttrs, DeclarativeBase):
     pass
